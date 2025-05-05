@@ -1,59 +1,59 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment'; // Adjust if needed
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppServiceService {
+
   private readonly ROOT_URL: string;
 
   constructor(private http: HttpClient) {
     this.ROOT_URL = environment.production ? 'api' : 'test';
   }
 
-  initializeDB(): Observable<any> {
-    return this.http.get(`${this.ROOT_URL}/dbinitialize`);
+  initializeDB() {
+    return this.http.get(`/${this.ROOT_URL}/dbinitialize`);
   }
 
-  getTeachers(): Observable<any> {
-    return this.http.get(`${this.ROOT_URL}/listTeachers`);
+  getTeacherData() {
+    return this.http.get(`/${this.ROOT_URL}/listTeachers`);
   }
 
-  getStudents(): Observable<any> {
-    return this.http.get(`${this.ROOT_URL}/listStudents`);
+  getStudentData() {
+    return this.http.get(`/${this.ROOT_URL}/listStudents`);
   }
 
-  getStudentById(id: string): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/getStudentInfo`, { id });
+  getOneStudentData(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/getStudentInfo`, payload);
   }
 
-  getTeacherById(id: string): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/getTeacherInfo`, { id });
+  getOneTeacherData(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/getTeacherInfo`, payload);
   }
 
-  createTeacher(teacherData: any): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/addTeacher`, teacherData);
+  addTeacher(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/addTeacher`, payload);
   }
 
-  updateTeacher(teacherData: any): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/editTeacher`, teacherData);
+  deleteTeacher(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/deleteTeacher`, payload);
   }
 
-  deleteTeacher(id: string): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/deleteTeacher`, { id });
+  editTeacher(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/editTeacher`, payload);
   }
 
-  createStudent(studentData: any): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/addStudent`, studentData);
+  editStudent(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/editStudent`, payload);
   }
 
-  updateStudent(studentData: any): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/editStudent`, studentData);
+  addStudent(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/addStudent`, payload);
   }
 
-  deleteStudent(id: string): Observable<any> {
-    return this.http.post(`${this.ROOT_URL}/deleteStudent`, { id });
+  deleteStudent(payload: object) {
+    return this.http.post(`/${this.ROOT_URL}/deleteStudent`, payload);
   }
 }
